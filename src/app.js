@@ -3,6 +3,8 @@ const path = require('path');
 
 const express = require('express');
 const {accounts, users, writeJSON} = require('./data');
+const accountRoutes = require('./routes/accounts');
+const servicesRoutes = require('./routes/services');
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -10,6 +12,9 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true}));
+
+app.use('/account', accountRoutes);
+app.use('/services', servicesRoutes);
 
 /*
 const accountData = fs.readFileSync(
@@ -31,7 +36,7 @@ app.get('/', (req, res) => res.render('index', {title:'Account Summary', account
 app.get('/profile', (req, res) => {
   res.render('profile', {user:users[0]});
 })
-
+/*
 app.get('/savings', (req, res) => {
   res.render('account', {account: accounts.savings })
 });
@@ -43,6 +48,9 @@ app.get('/checking', (req, res) => {
 app.get('/credit', (req, res) => {
   res.render('account', {account: accounts.credit})
 });
+*/
+
+/*
 app.get('/transfer', (req, res) => {
   res.render('transfer' )
 });
@@ -68,7 +76,7 @@ app.post('/payment', (req, res) => {
   res.render('payment', {message:'Payment successfull', account: accounts.credit});
 
 })
-
+*/
 
 
 app.listen(3000, ()=> console.log('Ps project running on port 3000'));
